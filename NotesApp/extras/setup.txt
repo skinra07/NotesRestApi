@@ -1,0 +1,37 @@
+This file contains the instructions on how to setup and run this application.
+After successfull setup, I am expected it to run at http://localhost:8080/NotesApp/api/notes
+
+A) Setup Sqlite3 embedded database:
+	1) Go to https://www.sqlite.org/download.html and get the binaries for particular OS. For my case, I used Window (x64). 
+        2) Unzip it to some folder. In my case C:\sqlite.
+	3) Add this directory to PATH.  Now you can execute sqlite3 from any directory.
+        4) create directory where you want your sqlite DB to reside. In my case: C:\Users\Sandeep.Kinra\DB.
+        5) using cmd/terminal window, go to directory in step 4, and type sqlite3 lb.db
+        6) After executing step 5, it will create lb.db database. Then type at .databases
+        7) After step 6, you can see the lb.db. Now execute the following to create table:
+            CREATE TABLE IF NOT EXISTS NOTES(
+ 		ID INTEGER PRIMARY KEY     NOT NULL,
+ 		BODY TEXT	NOT NULL
+		); 
+
+        8) Adter step 7, table NOTES is created. Type .tables  You will see name of table NOTES
+        9)  Now your sqlite setup is completed.
+
+B) Install Tomcat 9
+C) From extra directory, copy sqlite-jdbc.3.23.1.jar to your tomcat/lib directory
+D) I have added only basic logging to catch errors. PLease add the following in tomcat/conf/logging.properties
+   com.lb.notes.doa = INFO 
+   com.lb.notes.doa.handlers = 1catalina.org.apache.juli.AsyncFileHandler
+
+   This will write JDBC erros to catalina.log file.
+
+E) In target folder there is .war file. Before we put this .war file into tomcat/webapps/ROOT directory, we need to make few changes:
+
+   Using 7zip, open archive this file. Copy context.xml file from META-INF to some other location. Open the context.xml file, and update 
+   url value. Currently it reference the location of sqllite DB as menioned in Step A, 4. Update to whatever location/name you've created.
+   Save it and put this file back to open archive.
+
+F) Now put this updated .war file in tomcat ROOT directory and start the tomcat. 
+   Hopefully everything is running at http://localhost:8080/NotesApp/api/notes  If not, please contact me.
+
+G) PLease see the file testcase.txt in extra folder. Those are the test cases I ran.

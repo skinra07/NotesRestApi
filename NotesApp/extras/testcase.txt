@@ -1,0 +1,25 @@
+NOTE: Since these testcases ran in window, I had to but escape for double quote in JSON value. If you are running in Linux/Mac,
+Then you don't need escape character for double quote.
+
+POST
+curl -i -H "Content-Type: application/json" -X POST -d "{ \"body\": \"Pick up the Groceries\" }" http://localhost:8080/NotesApp/api/notes
+
+In MAC
+curl -i -H "Content-Type: application/json" -X POST -d '{ "body": "Pick up the Groceries" }' http://localhost:8080/NotesApp/api/notes
+
+Please note the PUT require JSON input
+PUT
+curl -i -H "Content-Type: application/json" -X PUT -d "{ \"id\":2, \"body\": \"This is Sandeep.\" }" http://localhost:8080/NotesApp/api/notes
+
+GET 
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/NotesApp/api/notes/7
+
+GET
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/NotesApp/api/notes
+
+GET
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/NotesApp/api/notes?query=Sandeep
+
+
+DELETE
+curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/NotesApp/api/notes/8
